@@ -9,7 +9,7 @@ const Employee = require('./models/employees');
 
 
 const app = express();
-app.use(express.static('public'));
+app.use(express.static('./public'));
 const PORT = 7000;
 
 // MongoDb Connection Config
@@ -20,31 +20,11 @@ mongoose.connection.on("connected", function(err, connected){
 })
 
 
-async function employeeDirectory(){
-    return (await Employee.find());
-}
 
-async function addSingleEmployee(_,{FirstName, LastName, Age, DateOfJoining, Title, Department, EmployeeType, CurrentStatus}){
-
-    console.log(__filename,`25>>DateOfJoining:`, DateOfJoining);
-    let singleEmployee = {
-        FirstName: FirstName,
-        LastName:LastName,
-        Age: Age,
-        DateOfJoining: DateOfJoining,
-        Title: Title,
-        Department: Department,
-        EmployeeType: EmployeeType,
-        CurrentStatus: CurrentStatus
-    }
-
-    let cnt = await (Employee.find().count());
-    singleEmployee.Id = cnt + 1;
-    return await (Employee.create(singleEmployee));
-}
 
 const typeDefs = `
     type employee {
+        _id: String,
         Id: Int,
         FirstName: String,
         LastName: String,
@@ -76,6 +56,29 @@ const resolvers = {
     }
 }
 
+async function employeeDirectory(){
+    return (await Employee.find());
+}
+
+async function addSingleEmployee(_,{FirstName, LastName, Age, DateOfJoining, Title, Department, EmployeeType, CurrentStatus}){
+
+    console.log(__filename,`25>>DateOfJoining:`, DateOfJoining);
+    let singleEmployee = {
+        FirstName: FirstName,
+        LastName:LastName,
+        Age: Age,
+        DateOfJoining: DateOfJoining,
+        Title: Title,
+        Department: Department,
+        EmployeeType: EmployeeType,
+        CurrentStatus: CurrentStatus
+    }
+
+    let cnt = await (Employee.find().count());
+    singleEmployee.Id = cnt + 1;
+    return await (Employee.create(singleEmployee));
+}
+
 const server = new ApolloServer({
      typeDefs, 
      resolvers 
@@ -85,5 +88,9 @@ server.start()
     .then(()=>{
         server.applyMiddleware({app, path: '/graphql', cors: true});
     })
+
+app.get('/', (req, res) => {
+    res.render('index.html');
+});
     
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

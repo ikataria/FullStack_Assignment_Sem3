@@ -1,4 +1,4 @@
-const dbEmp = require('./models/employees');
+const dbEmp = require('./server/models/employees');
 
 
 module.exports = async() => {

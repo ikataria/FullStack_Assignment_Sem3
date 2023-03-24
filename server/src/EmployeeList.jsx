@@ -326,13 +326,13 @@ const EmployeeDirectory = () => {
     }
 
     return (
-        <div>
+        <React.StrictMode>
             <EmployeeSearch />
             <hr />
             <EmployeeTable allEmployees={allEmployees} />
             <hr />
             <EmployeeCreate AddSingleEmployee={AddSingleEmployee} />
-        </div>
+        </React.StrictMode> 
     )
 }
 
