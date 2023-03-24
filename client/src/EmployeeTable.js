@@ -3,8 +3,9 @@ import EmployeeRow from './EmployeeRow'
 
 const EmployeeTable = ({ allEmployees }) => {
     const style = {
-        border: "1px solid red",
-        "font-size": "20px"
+        "border": "1px solid black",
+        "font-size": "20px",
+        "margin": "auto"
     }
 
     const allEmployeesRows = allEmployees.map(employee => (
@@ -13,7 +14,7 @@ const EmployeeTable = ({ allEmployees }) => {
 
     return (
         <div>
-            <h2>Welcome to the Employee Table</h2>
+            <h3>Welcome to the Employee Table</h3>
             <table style={style}>
                 <thead>
                     <tr>

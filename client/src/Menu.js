@@ -6,7 +6,7 @@ function Menu() {
         <BrowserRouter>
             <div>
                 <nav>
-                    <h3>Employee Management System</h3>
+                    <h1>Employee Management System</h1>
                 </nav>
                 <PageRoutes/>                
             </div>

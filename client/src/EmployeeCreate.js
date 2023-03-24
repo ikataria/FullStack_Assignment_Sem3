@@ -82,7 +82,7 @@ const EmployeeCreate = ({ AddSingleEmployee }) => {
 
     return (
         <div>
-            <h2>Welcome to the Employee Creation Form</h2>
+            <h3>Welcome to the Employee Creation Form</h3>
             <div class="container">
                 <form name="addEmployee" onSubmit={handleSubmit}>
                     <div className="row">
