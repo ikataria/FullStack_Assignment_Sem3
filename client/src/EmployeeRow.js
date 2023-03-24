@@ -2,7 +2,24 @@ import { BrowserRouter, Link } from "react-router-dom";
 
 function EmployeeRow({ employee, style }) {
 
-    const edit = `/edit/${employee._id}`
+    async function deleteRow(){
+        const query = `
+                query  {
+                    deleteRow(Id:"${employee._id}") {
+                        FirstName
+                    }
+              }
+            `;
+            fetch('http://localhost:7000/graphql', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query})
+            }).then(async (response) => {
+                await response.json();
+                window.location.assign("/")
+            })
+    }
+
     return (
         <tr>
             <td style={style}>{employee.Id}</td>
@@ -16,7 +33,8 @@ function EmployeeRow({ employee, style }) {
             <td style={style}>{employee.CurrentStatus}</td>
 
             <td style={style}><Link to={`/edit/${employee._id}`}>Edit</Link></td>
-
+            <td><button onClick={deleteRow}>Delete</button></td>
+            
         </tr>
     )
 }

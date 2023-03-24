@@ -37,25 +37,23 @@ const EmployeeDirectory = () => {
         }).then(async (response) => {
             let tempEmployees = await response.json();
 
-            
             let tempDirectory = tempEmployees.data.employeeDirectory;
-            console.log(`
-                line 50, tempDirectory: ${JSON.stringify(tempDirectory)}
-            `);
+
             let result = [] ;
             tempEmployees.data.employeeDirectory.forEach(e=>{
 
                 if(e.EmployeeType == employeeType){
                     result.push(e);
-                } else if(e.Title == role) {
+                } 
+                if(e.Title == role) {
                     result.push(e);
-                } else if(e.Department == department) {
+                } 
+                if(e.Department == department) {
                     result.push(e);
                 }
   
             })
 
-            console.log(`result67>>`, result);
             let toDisplay = result.length > 0 ? result: tempDirectory;
             // console.log('toDisplay>>>>>>',toDisplay);
             setAllEmployees(toDisplay);

@@ -115,7 +115,7 @@ const EmployeeCreate = ({ AddSingleEmployee }) => {
                         </div>
 
                         <div className="col-75">
-                            <input type="text" id="age" name="age" />
+                            <input type="number" id="age" name="age" />
                             <span style={{ color: "red" }}>{errMsgAge}</span>
                         </div>
                     </div>

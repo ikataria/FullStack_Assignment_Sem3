@@ -28,6 +28,7 @@ const EmployeeTable = ({ allEmployees }) => {
                         <th style={style}>Employee Type</th>
                         <th style={style}>Current Status</th>
                         <th style={style}>EDIT</th>
+                        <th style={style}>DELETE</th>
                     </tr>
                 </thead>
 
