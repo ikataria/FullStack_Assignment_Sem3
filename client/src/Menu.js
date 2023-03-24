@@ -6,12 +6,8 @@ function Menu() {
         <BrowserRouter>
             <div>
                 <nav>
-                    <h3>Welcome to EMS</h3>
-                    <Link to="/">Home</Link>
-                    {' | '}
-                    <Link to="/list">List</Link>
+                    <h3>Employee Management System</h3>
                 </nav>
-
                 <PageRoutes/>                
             </div>
         </BrowserRouter>

@@ -1,8 +1,6 @@
 import EmployeeSearch from './EmployeeSearch';
 import EmployeeTable from './EmployeeTable';
 import EmployeeCreate from './EmployeeCreate';
-// import IssueTable from './IssueTable'
-// import IssueAdd from './IssueAdd'
 import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 
@@ -11,8 +9,9 @@ const EmployeeDirectory = () => {
     const [allEmployees, setAllEmployees] = useState([]);
     const params = useLocation().search;
     const employeeType = new URLSearchParams(params).get('employeeType');
-    console.log(`employeetype>>`, employeeType);
-
+    const role = new URLSearchParams(params).get('role');
+    const department = new URLSearchParams(params).get('department');
+    
     let query = `
         query {
             employeeDirectory {
@@ -37,16 +36,26 @@ const EmployeeDirectory = () => {
             body: JSON.stringify({ query })
         }).then(async (response) => {
             let tempEmployees = await response.json();
-            let tempDirectory = tempEmployees.data.employeeDirectory;
 
+            
+            let tempDirectory = tempEmployees.data.employeeDirectory;
+            console.log(`
+                line 50, tempDirectory: ${JSON.stringify(tempDirectory)}
+            `);
             let result = [] ;
             tempEmployees.data.employeeDirectory.forEach(e=>{
-                if(e.EmployeeType == employeeType)
-                    result.push(e)
+
+                if(e.EmployeeType == employeeType){
+                    result.push(e);
+                } else if(e.Title == role) {
+                    result.push(e);
+                } else if(e.Department == department) {
+                    result.push(e);
+                }
   
             })
 
-            // setAllIssues(tempList);
+            console.log(`result67>>`, result);
             let toDisplay = result.length > 0 ? result: tempDirectory;
             // console.log('toDisplay>>>>>>',toDisplay);
             setAllEmployees(toDisplay);
@@ -55,7 +64,7 @@ const EmployeeDirectory = () => {
 
     useEffect(() => {
         fetchData()
-    }, [employeeType]);
+    }, [employeeType, role, department]);
 
     const AddSingleEmployee = (singleEmployee) => {
 
